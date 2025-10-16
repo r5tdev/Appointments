@@ -452,6 +452,9 @@ class BackendUtils
             $dts = $this->getDateTimeString(
                 $evt->DTSTART->getDateTime(),
                 $apptDoc->attendeeTimezone
+            ) . ' - ' . $this->getDateTimeString(
+                $evt->DTEND->getDateTime(),
+                $apptDoc->attendeeTimezone
             );
         } else {
             return [null, null, "", ""];
@@ -533,10 +536,16 @@ class BackendUtils
             $ret[0] = $this->getDateTimeString(
                 $evt->DTSTART->getDateTime(),
                 $apptDoc->attendeeTimezone
+            ) . ' - ' . $this->getDateTimeString(
+                $evt->DTEND->getDateTime(),
+                $apptDoc->attendeeTimezone
             );
         } else {
             $ret[0] = $this->getDateTimeString(
                 $evt->DTSTART->getDateTime(),
+                $evt->{self::TZI_PROP}->getValue()
+            ) . ' - ' . $this->getDateTimeString(
+                $evt->DTEND->getDateTime(),
                 $evt->{self::TZI_PROP}->getValue()
             );
         }
@@ -730,10 +739,16 @@ class BackendUtils
             $dts = $this->getDateTimeString(
                 $evt->DTSTART->getDateTime(),
                 $apptDoc->attendeeTimezone
+            ) . ' - ' . $this->getDateTimeString(
+                $evt->DTEND->getDateTime(),
+                $apptDoc->attendeeTimezone
             );
         } else {
             $dts = $this->getDateTimeString(
                 $evt->DTSTART->getDateTime(),
+                $evt->{self::TZI_PROP}->getValue()
+            ) . ' - ' . $this->getDateTimeString(
+                $evt->DTEND->getDateTime(),
                 $evt->{self::TZI_PROP}->getValue()
             );
         }

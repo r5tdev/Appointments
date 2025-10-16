@@ -378,6 +378,9 @@ class DavListener implements IEventListener
             $date_time = $utils->getDateTimeString(
                 $evt->DTSTART->getDateTime(),
                 $doc->attendeeTimezone
+            ) . ' - ' . $utils->getDateTimeString(
+                $evt->DTEND->getDateTime(),
+                $doc->attendeeTimezone
             );
 
             list($org_email, $org_name, $org_phone) = $this->getOrgInfo();
@@ -716,10 +719,16 @@ class DavListener implements IEventListener
             $date_time = $utils->getDateTimeString(
                 $evt->DTSTART->getDateTime(),
                 $doc->attendeeTimezone
+            ) . ' - ' . $utils->getDateTimeString(
+                $evt->DTEND->getDateTime(),
+                $doc->attendeeTimezone
             );
         } else {
             $date_time = $utils->getDateTimeString(
                 $evt->DTSTART->getDateTime(),
+                $evt->{BackendUtils::TZI_PROP}->getValue()
+            ) . ' - ' . $utils->getDateTimeString(
+                $evt->DTEND->getDateTime(),
                 $evt->{BackendUtils::TZI_PROP}->getValue()
             );
         }
